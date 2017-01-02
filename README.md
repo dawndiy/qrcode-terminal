@@ -1,8 +1,8 @@
 # QRCode Terminal
 
-This is a command-line tool to generate QRCode in terminal.
+This is a command-line tool to generate QRCode in terminal. And supports multiple colors.
 
-![](demo.png)
+<img src="demo.png" width="450">
 
 ## Install
 
