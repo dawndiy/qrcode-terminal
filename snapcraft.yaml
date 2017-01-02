@@ -1,0 +1,19 @@
+name: qrcode-terminal
+version: '1.0'
+summary: QRCode generater terminal edition.
+description: |
+  This is a command-line tool to generate QRCode in terminal. And supports
+  multiple colors.
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+apps:
+  qrcode-terminal:
+    command: bin/qrcode-terminal
+
+parts:
+  qrcode-terminal:
+    source: .
+    plugin: go
+    go-importpath: github.com/dawndiy/qrcode-terminal
