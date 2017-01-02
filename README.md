@@ -1,5 +1,7 @@
 # QRCode Terminal
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/dawndiy/qrcode-terminal/master/LICENSE)
+
 This is a command-line tool to generate QRCode in terminal. And supports multiple colors.
 
 <img src="demo.png" width="450">
@@ -16,3 +18,7 @@ $ go get github.com/dawndiy/qrcode-terminal
 $ qrcode-terminal --help
 $ qrcode-terminal 'https://github.com/dawndiy/qrcode-terminal'
 ```
+
+## License
+
+Released under the [MIT License](https://raw.githubusercontent.com/dawndiy/qrcode-terminal/master/LICENSE).
