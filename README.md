@@ -17,6 +17,7 @@ $ go get github.com/dawndiy/qrcode-terminal
 ```bash
 $ qrcode-terminal --help
 $ qrcode-terminal 'https://github.com/dawndiy/qrcode-terminal'
+$ qrcode-terminal -b white -f magenta 'I Love You'
 ```
 
 ## License
