@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"runtime"
 	"strconv"
 	"strings"
 
@@ -44,7 +45,9 @@ func init() {
 	flag.StringVar(&frontColor, "f", "black", "Front color")
 	flag.StringVar(&backgroundColor, "b", "white", "Background color")
 	flag.StringVar(&levelString, "l", "m", "Error correction level")
-	flag.StringVar(&codeJustify, "j", "left", "QR-Code justify")
+	if runtime.GOOS != "windows" {
+		flag.StringVar(&codeJustify, "j", "left", "QR-Code justify")
+	}
 }
 
 func main() {
@@ -193,8 +196,10 @@ func printHelp() {
 Supported background colors: [black, red, green, yellow, blue, magenta, cyan, white]
 Supported front colors: [black, red, green, yellow, blue, magenta, cyan, white]
 Supported error correction levels: [L, M, Q, H]
-Supported qr-code justifies: [left, center, right]
 `
+	if runtime.GOOS != "windows" {
+		helpStr = helpStr + "\nSupported qr-code justifies: [left, center, right]"
+	}
 	fmt.Println(helpStr)
 	flag.PrintDefaults()
 }
