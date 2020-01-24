@@ -4,6 +4,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"ioutil"
 	"os"
 	"os/exec"
 	"runtime"
@@ -83,7 +84,12 @@ func main() {
 	}
 
 	if content = flag.Arg(0); content == "" {
-		content = "https://github.com/dawndiy/qrcode-terminal"
+		data, err = ioutil.ReadAll(os.Stdin)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		content = string(data)
 	}
 
 	qr, err := qrcode.New(content, level)
