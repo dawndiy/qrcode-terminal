@@ -4,7 +4,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"ioutil"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"runtime"
@@ -84,12 +84,12 @@ func main() {
 	}
 
 	if content = flag.Arg(0); content == "" {
-		data, err = ioutil.ReadAll(os.Stdin)
+		data, err := ioutil.ReadAll(os.Stdin)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
-		content = string(data)
+		content = strings.TrimSuffix(string(data), "\n")
 	}
 
 	qr, err := qrcode.New(content, level)
