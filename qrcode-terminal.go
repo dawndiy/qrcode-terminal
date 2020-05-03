@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"errors"
 	"flag"
 	"fmt"
@@ -94,7 +95,9 @@ func main() {
 
 	screenCols, _ := getTTYSize()
 
-	for ir, row := range qr.Bitmap() {
+	bitmap := qr.Bitmap()
+	output := bytes.NewBuffer([]byte{})
+	for ir, row := range bitmap {
 		lr := len(row)
 
 		if ir == 0 || ir == 1 || ir == 2 ||
@@ -104,30 +107,31 @@ func main() {
 
 		if justify == "center" {
 			for spaces := 0; spaces < (screenCols/2 - lr/2 - 2*(3*2)); spaces++ {
-				fmt.Print(" ")
+				output.WriteByte(' ')
 			}
 		}
 
 		if justify == "right" {
 			for spaces := 0; spaces < (screenCols - 2*(lr-3*2)); spaces++ {
-				fmt.Print(" ")
+				output.WriteByte(' ')
 			}
 		}
 
 		for ic, col := range row {
-			lc := len(qr.Bitmap())
+			lc := len(bitmap)
 			if ic == 0 || ic == 1 || ic == 2 ||
 				ic == lc-1 || ic == lc-2 || ic == lc-3 {
 				continue
 			}
 			if col {
-				fmt.Print(front)
+				output.WriteString(front)
 			} else {
-				fmt.Print(back)
+				output.WriteString(back)
 			}
 		}
-		fmt.Println()
+		output.WriteByte('\n')
 	}
+	output.WriteTo(os.Stdout)
 }
 
 func parseColor(str string) (color string, err error) {
